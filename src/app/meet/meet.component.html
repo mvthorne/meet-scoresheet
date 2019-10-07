@@ -1,0 +1,47 @@
+<div class="score-board">
+    <mat-grid-list cols="2" rowHeight="60px">
+        <mat-grid-tile>
+            {{meetData.ourTeam}} ({{meetData.oddLanes ? 'odd' : 'even'}} lanes)<br>
+            {{meetData.ourScore}}
+        </mat-grid-tile>
+        <mat-grid-tile>
+            {{meetData.theirTeam}} <br>
+            {{meetData.theirScore}}
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
+<mat-sidenav-container opened>
+    <mat-sidenav mode="side" #sidenav [(opened)]="opened">
+        <div class="sidebar-nav">
+            <h3>Events</h3>
+            <div class="event-list">
+                <button mat-raised-button [ngClass]="getEventClass(i)" *ngFor="let meetEvent of meetData.events; let i = index" (click)="selectEvent(i)">
+                    {{meetEvent.name + getEventText(i)}}
+                    <mat-icon>chevron_right</mat-icon>
+                </button>
+            </div>
+        </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <h3 (click)="opened = !opened"><mat-icon>arrow_back_ios</mat-icon> {{currentEvent.name}}</h3>
+        <div class="lanes" *ngIf="currentEvent.name !== 'Diving'">
+            <button mat-raised-button *ngFor="let lane of currentEvent.lanes; let i = index" (click)="selectLane(i)" [color]="getColor(i)">
+                {{lane.name + getPlaceText(i)}}
+            </button>
+        </div>
+        <div class="places" *ngIf="currentEvent.name === 'Diving'">
+            <div *ngFor="let place of [0,1,2,3,4,5]">
+                <span>{{getDivingPlaceText(place)}} Place: </span>
+                <mat-button-toggle-group [(ngModel)]="divePlaces[place]">
+                    <mat-button-toggle value="us">{{meetData.ourTeam}}</mat-button-toggle>
+                    <mat-button-toggle value="them">{{meetData.theirTeam}}</mat-button-toggle>
+                </mat-button-toggle-group>
+            </div>
+        </div>
+        <div class="controls">
+            <button mat-raised-button color="primary" (click)="scoreEvent()">Score Event</button>
+            <button mat-raised-button [color]="tied ? 'primary' : ''" *ngIf="currentEvent.name !== 'Diving'" (click)=toggleTied()>Tie</button>
+            <button mat-raised-button color="warn" (click)="reset()">Reset</button>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

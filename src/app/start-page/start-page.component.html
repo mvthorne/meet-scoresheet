@@ -1,0 +1,43 @@
+<div class="start-page">
+    <p>Welcome to the Meet Scoresheet, the website that aids in the scoring of a Varsity Dual Meet.</p>
+    <mat-expansion-panel [(expanded)]="newMeetOpened">
+        <mat-expansion-panel-header color="primary">
+            <mat-panel-title>New<span *ngIf="newMeetOpened">&nbsp;Meet</span></mat-panel-title>
+            <mat-panel-description *ngIf="!newMeetOpened">Click to start a new meet</mat-panel-description>
+        </mat-expansion-panel-header>
+        <form #f="ngForm" (ngSubmit)="startMeet(f)" novalidate autocomplete="off">
+            <mat-form-field>
+                <input matInput placeholder="Our Team" name="ourTeam" ngModel="{{defaultTeam}}" required #first="ngModel">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Their Team" name="theirTeam" ngModel required>
+            </mat-form-field>
+            <mat-button-toggle-group name="numLanes" ngModel="6">
+                <mat-button-toggle value="6">6 Lanes</mat-button-toggle>
+                <mat-button-toggle value="4">4 Lanes</mat-button-toggle>
+            </mat-button-toggle-group>
+            <p></p>
+            <mat-button-toggle-group name="laneAssignment" ngModel="odd">
+                <mat-button-toggle value="odd">Odd Lanes</mat-button-toggle>
+                <mat-button-toggle value="even">Even Lanes</mat-button-toggle>
+            </mat-button-toggle-group>
+            <p></p>
+            <mat-button-toggle-group name="hasDiving" ngModel="yes">
+                <mat-button-toggle value="yes">Diving</mat-button-toggle>
+                <mat-button-toggle value="no">No Diving</mat-button-toggle>
+            </mat-button-toggle-group>
+            <mat-action-row>
+                <button mat-raised-button color="primary">Start</button>
+            </mat-action-row>
+        </form>
+    </mat-expansion-panel>
+    <div *ngIf="oldMeets.length">
+        <h4>Prior Meets</h4>
+        <div class="old-meets-list">
+            <div *ngFor="let old of oldMeets; let i = index">
+                <button mat-icon-button color="warn" class="delete-button" (click)="deleteMeet(i)"><mat-icon>delete_forever</mat-icon></button>
+                <button mat-raised-button class="select-button" (click)="selectMeet(i)">{{old}}</button>
+            </div>
+        </div>
+    </div>
+</div>

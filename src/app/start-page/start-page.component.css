@@ -1,0 +1,41 @@
+div.start-page {
+    margin: 16px;
+}
+
+p {
+    margin-top: 0;
+}
+
+mat-form-field, mat-button-toggle-group {
+    width: 100%;
+}
+
+mat-button-toggle {
+    width: 50%;
+}
+
+h3, h4, h5 {
+    font-weight: lighter;
+    margin-bottom: 5px;
+}
+
+.old-meets-list {
+    overflow-y: auto;
+    max-height: calc(100vh - 200px);
+    padding: 3px;
+    margin: -3px;
+}
+
+.old-meets-list > div {
+    width: 100%;
+}
+
+.delete-button {
+    width: 10%;
+    margin-right: 5%;
+}
+
+.select-button {
+    width: 85%;
+    margin-top: 5px;
+}

@@ -1,0 +1,101 @@
+h3, h4, h5 {
+    font-weight: lighter;
+    margin-bottom: 5px;
+}
+
+mat-grid-tile {
+    text-align: center;
+}
+
+.score-board {
+    width: 100%;
+    margin-bottom: 0;
+    margin-top: -20px;
+    color: white;
+    background-color: #3f51b5;
+}
+
+span.score {
+    font-size: 1.1em;
+}
+
+mat-sidenav-container {
+    height: calc(100vh - 112px);
+}
+
+mat-sidenav {
+    padding: 13px;
+    width: 100%;
+}
+
+h3 {
+    margin-top: 0;
+}
+
+.event-list {
+    overflow-y: auto;
+    height: calc(100vh - 175px);
+    padding: 3px;
+}
+
+.event-list > button {
+    width: 100%;
+    margin-top: 6px;
+}
+
+.event-list > button:first-child {
+    margin-top: 0;
+}
+
+.event-won {
+    background-color: #109618;
+    color: white;
+}
+
+.event-lost {
+    background-color: #DC3912;
+    color: white;
+}
+
+.event-tied {
+    background-color: #FF9900;
+}
+
+mat-sidenav-content {
+    padding: 16px;
+}
+
+.lanes > button {
+    width: 100%;
+    margin-top: 6px;
+}
+
+.lanes > button:first-child {
+    margin-top: 0;
+}
+
+.places > div {
+    text-align: right;
+}
+
+mat-button-toggle-group {
+    width: 70%;
+    margin-bottom: 8px;
+}
+
+mat-button-toggle {
+    width: 50%;
+}
+
+.controls > button {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.controls > button:first-child {
+    margin-top: 40px;
+}
+
+h3 > mat-icon {
+    font-size: 16px;
+}
