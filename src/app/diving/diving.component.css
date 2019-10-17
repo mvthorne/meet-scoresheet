@@ -1,0 +1,120 @@
+h3, h4, h5 {
+    font-weight: lighter;
+    margin-bottom: 5px;
+}
+
+mat-grid-tile {
+    text-align: center;
+}
+
+.diving-title {
+    margin-top: -20px;
+    color: white;
+    background-color: #3f51b5;
+    text-align: center;
+    padding: 5px;
+}
+
+mat-sidenav-container {
+    height: calc(100vh - 112px);
+}
+
+mat-sidenav {
+    padding: 13px;
+    width: 100%;
+}
+
+h3 {
+    margin-top: 0;
+}
+
+h3 > a {
+    text-decoration: none;
+}
+
+h3 > a > mat-icon {
+    font-size: 16px;
+}
+
+.dive-list {
+    overflow-y: auto;
+    height: calc(100vh - 175px);
+    padding: 3px;
+}
+
+.dive-list > button {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.dive-list > button:first-child {
+    margin-top: 0;
+}
+
+.dive-list > button.fn-button {
+    margin-top: 24px;
+}
+
+mat-sidenav-content {
+    padding: 16px;
+}
+
+.dive-code-container {
+    text-align: center;
+}
+
+.dive-code-container > div {
+    display: flex;
+}
+
+.dive-code-container > div > div {
+    flex: 1;
+    margin-left: 3px;
+}
+
+.dive-code-container > div > div:first-child {
+    margin-left: 0;
+}
+
+div.middle-row > div {
+    padding: 10px 0;
+}
+
+div.middle-row > div.button-cell {
+    padding: 5px 0;
+}
+
+div.bottom-row > div {
+    padding-top: 4px;
+}
+
+div.dive-code-element {
+    font-size: 1.3em;
+    border: 1px solid darkgray;
+    border-radius: 5px;
+}
+
+div.dive-info > div {
+    display: flex;
+}
+
+div.dive-info > div > div {
+    flex: 4;
+    margin-top: 5px;
+}
+
+div.dive-info > div > div:first-child {
+    flex: 1;
+    text-align: right;
+    padding-right: 12px;
+    font-style: italic;
+}
+
+.controls > button {
+    width: 100%;
+    margin-top: 12px;
+}
+
+.controls > button:first-child {
+    margin-top: 40px;
+}

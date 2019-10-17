@@ -10,6 +10,8 @@ import { TitleBarComponent } from './title-bar/title-bar.component';
 import { StartPageComponent } from './start-page/start-page.component';
 import { MeetComponent } from './meet/meet.component';
 import { ConfirmComponent } from './confirm/confirm.component';
+import { DivingComponent } from './diving/diving.component';
+import { AddDiverComponent } from './add-diver/add-diver.component';
 
 @NgModule({
   declarations: [
@@ -17,10 +19,13 @@ import { ConfirmComponent } from './confirm/confirm.component';
     TitleBarComponent,
     StartPageComponent,
     MeetComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    DivingComponent,
+    AddDiverComponent
   ],
   entryComponents: [
-    ConfirmComponent
+    ConfirmComponent,
+    AddDiverComponent
   ],
   imports: [
     BrowserModule,

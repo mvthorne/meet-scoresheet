@@ -1,0 +1,100 @@
+<div class="diving-title">
+    <h3>Diving</h3>
+</div>
+<mat-sidenav-container opened>
+    <mat-sidenav mode="side" #sidenav [(opened)]="opened">
+        <div class="sidebar-nav">
+            <div *ngIf="!currentDiver">
+                <button mat-raised-button color="primary" (click)="addDiver()">Add a Diver</button>
+            </div>
+            <div *ngIf="currentDiver">
+                <h3>
+                    <a [routerLink]="['/meet']">
+                        <mat-icon>arrow_back_ios</mat-icon>
+                    </a>
+                    {{getDiverName()}}
+                </h3>
+                <div class="dive-list">
+                    <button mat-raised-button color="primary" *ngFor="let dive of currentDiver.dives; let i = index" (click)="selectDive(i)">
+                        {{getDiveDisplayName(dive, i)}}
+                    </button>
+                    <button mat-raised-button class="fn-button" (click)="addDiver()">Add Diver</button>
+                    <button mat-raised-button class="fn-button" [routerLink]="['/meet']">Back to Events</button>
+                </div>
+            </div>
+        </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <h3>
+            <a (click)="backToList()">
+                <mat-icon>arrow_back_ios</mat-icon>
+            </a>
+            {{currentDiver.diver}} - Dive #{{displayDive.diveNumber}}
+        </h3>
+        <div class="dive-code-container">
+            <div class="top-row">
+                <div></div>
+                <div><mat-icon color="primary" (click)="changeType(1)">expand_less</mat-icon></div>
+                <div><mat-icon color="primary" (click)="changeRotation(1)">expand_less</mat-icon></div>
+                <div><mat-icon color="primary" (click)="changeMinorRotation(1)">expand_less</mat-icon></div>
+                <div><mat-icon color="primary" (click)="changePosition(1)">expand_less</mat-icon></div>
+            </div>
+            <div class="middle-row">
+                <div><mat-icon color="primary">search</mat-icon></div>
+                <div class="dive-code-element">{{displayDive.first}}</div>
+                <div class="dive-code-element">{{displayDive.second}}</div>
+                <div class="dive-code-element">{{displayDive.third}}</div>
+                <div class="dive-code-element">{{displayDive.letter}}</div>
+            </div>
+            <div class="bottom-row">
+                <div></div>
+                <div><mat-icon color="primary" (click)="changeType(-1)">expand_more</mat-icon></div>
+                <div><mat-icon color="primary" (click)="changeRotation(-1)">expand_more</mat-icon></div>
+                <div><mat-icon color="primary" (click)="changeMinorRotation(-1)">expand_more</mat-icon></div>
+                <div><mat-icon color="primary" (click)="changePosition(-1)">expand_more</mat-icon></div>
+            </div>
+        </div>
+        <div class="dive-info">
+            <div>
+                <div>Dive:</div>
+                <div>{{currentDive.name}}</div>
+            </div>
+            <div>
+                <div>DD:</div>
+                <div>{{currentDive.dd}}</div>
+            </div>
+            <div>
+                <div>Score:</div>
+                <div>{{displayDive.score | number:'1.0-2'}}</div>
+            </div>
+        </div>
+        <div class="dive-code-container">
+            <div class="top-row">
+                <div></div>
+                <div><mat-icon color="primary" (click)="incScore(0, .5)">expand_less</mat-icon></div>
+                <div><mat-icon color="primary" (click)="incScore(1, .5)">expand_less</mat-icon></div>
+                <div><mat-icon color="primary" (click)="incScore(2, .5)">expand_less</mat-icon></div>
+                <div></div>
+            </div>
+            <div class="middle-row">
+                <div><i>Judges</i></div>
+                <div class="dive-code-element">{{displayDive.judge1}}</div>
+                <div class="dive-code-element">{{displayDive.judge2}}</div>
+                <div class="dive-code-element">{{displayDive.judge3}}</div>
+                <div class="button-cell"><button mat-raised-button color="warn" (click)="failDive()">Fail</button></div>
+            </div>
+            <div class="bottom-row">
+                <div></div>
+                <div><mat-icon color="primary" (click)="incScore(0, -.5)">expand_more</mat-icon></div>
+                <div><mat-icon color="primary" (click)="incScore(1, -.5)">expand_more</mat-icon></div>
+                <div><mat-icon color="primary" (click)="incScore(2, -.5)">expand_more</mat-icon></div>
+                <div></div>
+            </div>
+        </div>
+        <div class="controls">
+            <button mat-raised-button color="primary" (click)="scoreDive()">Score Dive</button>
+            <button mat-raised-button color="accent" (click)="capDD()" *ngIf="displayDive.diveNumber == 1" [disabled]="!currentDive || currentDive.dd <= 1.8">DD Capped at 1.8</button>
+            <button mat-raised-button (click)="backToList()">Return</button>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

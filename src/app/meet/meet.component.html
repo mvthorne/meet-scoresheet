@@ -1,14 +1,20 @@
 <div class="score-board">
-    <mat-grid-list cols="2" rowHeight="60px">
-        <mat-grid-tile>
-            {{meetData.ourTeam}} ({{meetData.oddLanes ? 'odd' : 'even'}} lanes)<br>
-            {{meetData.ourScore}}
-        </mat-grid-tile>
-        <mat-grid-tile>
-            {{meetData.theirTeam}} <br>
-            {{meetData.theirScore}}
-        </mat-grid-tile>
-    </mat-grid-list>
+    <div class="team-score">
+        <div class="team-name">
+            {{meetData.ourTeam}} ({{meetData.oddLanes ? 'odd' : 'even'}} lanes)
+        </div>
+        <div class="score">
+            {{meetData.ourScore | number:'1.0-2'}}
+        </div>
+    </div>
+    <div class="team-score">
+        <div class="team-name">
+            {{meetData.theirTeam}}
+        </div>
+        <div class="score">
+            {{meetData.theirScore | number:'1.0-2'}}
+        </div>
+    </div>
 </div>
 <mat-sidenav-container opened>
     <mat-sidenav mode="side" #sidenav [(opened)]="opened">
@@ -39,6 +45,7 @@
             </div>
         </div>
         <div class="controls">
+            <button mat-raised-button [routerLink]="['/diving']" *ngIf="currentEvent.name === 'Diving'">Enter Dives</button>
             <button mat-raised-button color="primary" (click)="scoreEvent()">Score Event</button>
             <button mat-raised-button [color]="tied ? 'primary' : ''" *ngIf="currentEvent.name !== 'Diving'" (click)=toggleTied()>Tie</button>
             <button mat-raised-button color="warn" (click)="reset()">Reset</button>

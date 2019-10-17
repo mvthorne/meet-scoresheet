@@ -28,7 +28,7 @@ export class MeetDataService {
     return window.localStorage.getItem('meet.ourTeam');
   }
 
-  private save() {
+  save() {
     window.localStorage.setItem('meet.data', JSON.stringify(this.meetData));
   }
 
@@ -242,6 +242,221 @@ export class MeetDataService {
     }
 
     this.save();
+  }
+
+  private getDiveName(diveNumber) {
+    let idx = 0;
+    let first = 0;
+    if (diveNumber.length === 5) {
+        first = parseInt(diveNumber.substring(0, 2), 10);
+        idx += 2;
+    } else {
+        first = parseInt(diveNumber[idx], 10);
+        idx++;
+    }
+
+    const second = parseInt(diveNumber[idx++], 10);
+    const third = parseInt(diveNumber[idx++], 10);
+    const letter = diveNumber[idx];
+    let currentDiveName = '';
+
+    switch (first) {
+        case 1: {
+            currentDiveName = 'Forward ';
+            break;
+        }
+        case 2: {
+            currentDiveName = 'Back ';
+            break;
+        }
+        case 3: {
+            currentDiveName = 'Reverse ';
+            break;
+        }
+        case 4: {
+            currentDiveName = 'Inward ';
+            break;
+        }
+        case 51: {
+            currentDiveName = 'Forward ';
+            break;
+        }
+        case 52: {
+            currentDiveName = 'Back ';
+            break;
+        }
+        case 53: {
+            currentDiveName = 'Reverse ';
+            break;
+        }
+        case 54: {
+            currentDiveName = 'Inward ';
+            break;
+        }
+    }
+
+    if (second === 0) {
+        switch (third) {
+            case 1: {
+                currentDiveName += 'Dive ';
+                break;
+            }
+            case 2: {
+                currentDiveName += 'Somersault ';
+                break;
+            }
+            case 3: {
+                currentDiveName += '1 ½ Somersault ';
+                break;
+            }
+            case 4: {
+                currentDiveName += 'Double Somersault ';
+                break;
+            }
+            case 5: {
+                currentDiveName += '2 ½ Somersault ';
+                break;
+            }
+            case 6: {
+                currentDiveName += 'Triple Somersault ';
+                break;
+            }
+            case 7: {
+                currentDiveName += '3 ½ Somersault ';
+                break;
+            }
+            case 9: {
+                currentDiveName += '4 ½ Somersault ';
+                break;
+            }
+        }
+    } else {
+        switch (second) {
+            case 1: {
+                currentDiveName += 'Dive ';
+                break;
+            }
+            case 2: {
+                currentDiveName += 'Somersault ';
+                break;
+            }
+            case 3: {
+                currentDiveName += '1 ½ Somersault ';
+                break;
+            }
+            case 4: {
+                currentDiveName += 'Double Somersault ';
+                break;
+            }
+            case 5: {
+                currentDiveName += '2 ½ Somersault ';
+                break;
+            }
+            case 7: {
+                currentDiveName += '3 ½ Somersault ';
+                break;
+            }
+        }
+
+        switch (third) {
+            case 1: {
+                currentDiveName += '½ Twist ';
+                break;
+            }
+            case 2: {
+                currentDiveName += '1 Twist ';
+                break;
+            }
+            case 3: {
+                currentDiveName += '1 ½ Twists ';
+                break;
+            }
+            case 4: {
+                currentDiveName += '2 Twists ';
+                break;
+            }
+            case 5: {
+                currentDiveName += '2 ½ Twists ';
+                break;
+            }
+            case 6: {
+                currentDiveName += '3 Twists ';
+                break;
+            }
+            case 7: {
+                currentDiveName += '3 ½ Twists ';
+                break;
+            }
+            case 8: {
+                currentDiveName += '4 Twists ';
+                break;
+            }
+            case 9: {
+                currentDiveName += '4 ½ Twists ';
+                break;
+            }
+        }
+    }
+
+    switch (letter) {
+        case 'A': {
+            currentDiveName += 'Straight Position';
+            break;
+        }
+        case 'B': {
+            currentDiveName += 'Pike Position';
+            break;
+        }
+        case 'C': {
+            currentDiveName += 'Tuck Position';
+            break;
+        }
+        case 'D': {
+            currentDiveName += 'Free Position';
+            break;
+        }
+    }
+
+    return currentDiveName;
+}
+
+  addDiver(diverName) {
+    const thisMeet = this.getMeetData();
+    const code = '101B';
+    const name = this.getDiveName(code);
+    const dd = 1.3;
+    const judge = 6.0;
+
+    thisMeet.diving.push({
+      diver: diverName,
+      dives: [
+        { code, name, dd, judges: [judge, judge, judge], failed: false, init: false },
+        { code, name, dd, judges: [judge, judge, judge], failed: false, init: false },
+        { code, name, dd, judges: [judge, judge, judge], failed: false, init: false },
+        { code, name, dd, judges: [judge, judge, judge], failed: false, init: false },
+        { code, name, dd, judges: [judge, judge, judge], failed: false, init: false },
+        { code, name, dd, judges: [judge, judge, judge], failed: false, init: false },
+      ]
+    });
+
+    if (thisMeet.diving.length === 1) {
+      window.localStorage.setItem('meet.mainDiver', diverName);
+    }
+
+    this.save();
+  }
+
+  getDiveData() {
+    const thisMeet = this.getMeetData();
+    if (thisMeet.diving === undefined) {
+      thisMeet.diving = [];
+      const mainDiver = window.localStorage.getItem('meet.mainDiver');
+      if (mainDiver) {
+        this.addDiver(mainDiver);
+      }
+    }
+
+    return thisMeet.diving;
   }
 
   deleteMeet(idx) {
